@@ -75,6 +75,11 @@ inputs:
     required: false
     default: ""
 
+  check_type:
+    description: "The type of HTTP check to perform (defaults to GET)"
+    required: false
+    default: "GET"
+
 runs:
   using: "docker"
   image: "Dockerfile"

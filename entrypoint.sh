@@ -6,9 +6,9 @@ printf "Found files in workspace:\n"
 ls
 
 printf "Looking for urlchecker install...\n"
-which urlchecker
+URLCHECKER="$(command -v urlchecker)"
 
-COMMAND="urlchecker check "
+COMMAND="${URLCHECKER} check "
 
 # branch is optional
 if [ ! -z "${INPUT_BRANCH}" ]; then
@@ -83,6 +83,11 @@ fi
 if [ "${INPUT_FORCE_PASS}" == "true" ]; then
     echo "Force pass requested."
     COMMAND="${COMMAND} --force-pass"
+fi
+
+# check type
+if [ -z "${INPUT_CHECK_TYPE}" ]; then
+    COMMAND="${COMMAND} --check_type ${INPUT_CHECK_TYPE}"
 fi
 
 # git path, if not defined, we assume $PWD
